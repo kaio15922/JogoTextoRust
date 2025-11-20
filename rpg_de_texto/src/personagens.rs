@@ -1,3 +1,5 @@
+use std::ops::Index;
+
 use crate::itens::Item;
 
 pub struct Personagem 
@@ -47,12 +49,18 @@ impl Personagem
     //inventario
     pub fn mostrar_inventario(&self)
     {
-        if self.inventario.is_empty() == false
+        let mut indice = 0;
+        if !self.inventario.is_empty()
         {
             for itens in &self.inventario
             {
-                println!("Nome: {} , Descrição: {}", itens.nome, itens.descrição)
+                println!("Nome: {} , Descrição: {} , Indice: {} ", itens.nome, itens.descrição, indice);
+                indice += 1;
             }
+        }
+        else
+        {
+            println!("Inventário vazio, otário");
         }
     }
 
@@ -61,6 +69,34 @@ impl Personagem
     {
         println!("Item adicionado. Nome: {}", item.nome);
         self.inventario.push(item);
+    }
+
+    //usando
+    pub fn usar_item(&mut self, indice: i32)
+    {
+        if indice >= 0 && indice < self.inventario.len() as i32
+        {
+            let item = self.inventario.remove(indice as usize);
+            if item.nome == "Poção_de_ataque"
+            {
+                self.ataque += item.efeito;
+                println!("Poção de ataque usada!");
+            }
+            else if item.nome == "Poção_de_vida"
+            {
+                self.vida += item.efeito as i32;
+                println!("Poção de vida usada!");
+            }
+            else if item.nome == "Poção_de_defesa"
+            {
+                self.defesa += item.efeito;
+                println!("Poção de defesa usada!");
+            }
+        }
+        else
+        {
+            println!("Índice inválido.")
+        }
     }
 
     //cria barbaro

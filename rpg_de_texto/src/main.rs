@@ -3,7 +3,8 @@ mod itens;
 
 use crate::{itens::Item, personagens::Personagem};
 
-fn main() {
+fn main() 
+{
 
     //So testando
     println!("Hello, world!");
@@ -17,42 +18,45 @@ fn main() {
 
     let vida = Item::gerar_poc_vida();
     let defesa = Item::gerar_poc_defesa();
+    let ataque = Item::gerar_poc_ataque();
+    let vida2 = Item::gerar_poc_vida();
 
-    println!("o nome do mago é {}// sua vida é {}// seu ataque é {}// sua defesa é {}...", mago.nome, mago.vida, mago.ataque, mago.defesa);
+    println!("o nome do barbaro é {}// sua vida é {}// seu ataque é {}// sua defesa é {}...", barbaro.nome, barbaro.vida, barbaro.ataque, barbaro.defesa);
 
-    println!("vida do arqueiro = {}", arqueiro.vida);
-
-    barbaro.ataque(&mut arqueiro, false);
-
-    println!("vida do arqueiro = {}", arqueiro.vida);
-
-    println!("vida do arqueiro = {}", arqueiro.vida);
-
-    barbaro.ataque(&mut arqueiro, false);
-
-    println!("vida do arqueiro = {}", arqueiro.vida);
-
-    println!("vida do arqueiro = {}", arqueiro.vida);
-
-    barbaro.ataque(&mut arqueiro, false);
-
-    println!("vida do arqueiro = {}", arqueiro.vida);
-
-    vida.fazer_efeito(&mut arqueiro);
-    vida.fazer_efeito(&mut arqueiro);
-    vida.fazer_efeito(&mut arqueiro);
-
-    println!("vida do arqueiro = {}", arqueiro.vida);
+    println!("\n------------------------\n");
 
     barbaro.add_no_inventario(vida);
+    barbaro.add_no_inventario(ataque);
+    barbaro.add_no_inventario(vida2);
+    
+
+    println!("\n------------------------\n");
+
+    barbaro.mostrar_inventario();
+
+    println!("\n------------------------\n");
+
+    barbaro.usar_item(2);
+
+    println!("\n------------------------\n");
+
+    println!("vida do arqueiro = {}", barbaro.vida);
+
+    println!("\n------------------------\n");
+
     barbaro.add_no_inventario(defesa);
 
+    println!("\n------------------------\n");
+    
     barbaro.mostrar_inventario();
+
+    println!("\n------------------------\n");
+
+    barbaro.usar_item(0);
+    barbaro.usar_item(1);
+    barbaro.usar_item(0);
+
+    println!("\n------------------------\n");
+
     barbaro.mostrar_inventario();
-    barbaro.mostrar_inventario();
-
-
-
-
-
 }
