@@ -1,7 +1,9 @@
 mod personagens;
 mod itens;
+mod combate;
 
-use crate::{itens::Item, personagens::Personagem};
+use std::ops::Index;
+use crate::{itens::Item, personagens::Personagem, combate::combate};
 
 fn main() 
 {
@@ -59,4 +61,10 @@ fn main()
     println!("\n------------------------\n");
 
     barbaro.mostrar_inventario();
+
+    //TESTE DE 
+    let vidateste = Item::gerar_poc_vida();
+    mago.add_no_inventario(vidateste);
+
+    combate(&mut mago, &mut goblin);
 }

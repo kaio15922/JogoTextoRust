@@ -7,6 +7,7 @@ pub struct Personagem
     pub nome: String,
     pub vida: i32,
     pub ataque: u32,
+    pub ataque_especial: Option<i32>,
     pub defesa: u32,
     pub inventario: Vec<Item>,
 }
@@ -14,7 +15,7 @@ pub struct Personagem
 impl Personagem 
 {
     //Ataque do personagem
-    pub fn ataque (&self, alvo: &mut Personagem, especial: bool) 
+    pub fn ataque (&mut self, alvo: &mut Personagem, especial: bool) 
     {
 
         let mut margem: u32 = 0;
@@ -25,11 +26,17 @@ impl Personagem
             "Arqueiro"  => { margem = 31; },
             "Bárbaro"   => { margem = 26; },
             "Mago"      => { margem = 36; },
-            _           => {println!("aoba")},
+            "Dragão"    => { margem = 50; },
+            "Goblin"    => { margem = 10; },
+            "Orc"       => { margem = 20; },
+            _           => {println!("aoba");},
         }
 
         if especial == true
         {
+            if let Some(v) = &mut self.ataque_especial {
+             *v -= 1; //Gastar ataque especial
+             }
 
             margem -=15;
         }
@@ -54,13 +61,13 @@ impl Personagem
         {
             for itens in &self.inventario
             {
-                println!("Nome: {} , Descrição: {} , Indice: {} ", itens.nome, itens.descrição, indice);
+                println!("{}. Nome: {} , Descrição: {}", (indice+1), itens.nome, itens.descrição);
                 indice += 1;
             }
         }
         else
         {
-            println!("Inventário vazio, otário");
+            println!("Inventário está vazio");
         }
     }
 
@@ -107,6 +114,7 @@ impl Personagem
             nome: "Bárbaro".to_string(),
             vida: 300,
             ataque: 0,
+            ataque_especial: Some(5),
             defesa: 12,
             inventario: Vec::new(),
         }
@@ -120,6 +128,7 @@ impl Personagem
             nome: "Arqueiro".to_string(),
             vida: 250,
             ataque: 0,
+            ataque_especial: Some(5),
             defesa: 7,
             inventario: Vec::new(),
         }
@@ -133,6 +142,7 @@ impl Personagem
             nome: "Mago".to_string(),
             vida: 260,
             ataque: 0,
+            ataque_especial: Some(5),
             defesa: 5,
             inventario: Vec::new(),
         }
@@ -146,6 +156,7 @@ impl Personagem
             nome: "Dragão".to_string(),
             vida: 125,
             ataque: 10,
+            ataque_especial: None,
             defesa: 10,
             inventario: Vec::new(),
         }
@@ -159,6 +170,7 @@ impl Personagem
             nome: "Goblin".to_string(),
             vida: 40,
             ataque: 10,
+            ataque_especial: None,
             defesa: 2,
             inventario: Vec::new(),
         }
@@ -172,6 +184,7 @@ impl Personagem
             nome: "Orc".to_string(),
             vida: 60,
             ataque: 10,
+            ataque_especial: None,
             defesa: 5,
             inventario: Vec::new(),
         }
