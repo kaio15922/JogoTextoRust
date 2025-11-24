@@ -23,7 +23,7 @@ fn main()
 
     io::stdin().read_line(&mut escolha).expect("Deu merda");
     
-    match escolha.as_str()
+    match escolha.as_str().trim()
     {
         "1" => {game(&mut barbaro);},
         "2" => {game(&mut mago);},

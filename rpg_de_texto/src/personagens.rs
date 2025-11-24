@@ -43,7 +43,7 @@ impl Personagem
         let mut dano = rand::random_range(1..=margem);
         if especial ==true
         {
-            dano = dano*2;
+            dano = dano*2 + self.ataque;
         }
 
         if dano > alvo.defesa
@@ -53,7 +53,7 @@ impl Personagem
     }
 
     //inventario
-    pub fn mostrar_inventario(&self)
+    pub fn mostrar_inventario(&self) -> bool
     {
         let mut indice = 0;
         if !self.inventario.is_empty()
@@ -63,10 +63,12 @@ impl Personagem
                 println!("{}. Nome: {} , Descrição: {}", (indice+1), itens.nome, itens.descrição);
                 indice += 1;
             }
+            return true;
         }
         else
         {
             println!("Inventário está vazio");
+            return false;
         }
     }
 
@@ -112,7 +114,7 @@ impl Personagem
         {
             nome: "Bárbaro".to_string(),
             vida: 300,
-            ataque: 0,
+            ataque: 15,
             ataque_especial: Some(5),
             defesa: 12,
             inventario: Vec::new(),
@@ -126,7 +128,7 @@ impl Personagem
         {
             nome: "Arqueiro".to_string(),
             vida: 250,
-            ataque: 0,
+            ataque: 12,
             ataque_especial: Some(5),
             defesa: 7,
             inventario: Vec::new(),
@@ -140,7 +142,7 @@ impl Personagem
         {
             nome: "Mago".to_string(),
             vida: 260,
-            ataque: 0,
+            ataque: 20,
             ataque_especial: Some(5),
             defesa: 5,
             inventario: Vec::new(),

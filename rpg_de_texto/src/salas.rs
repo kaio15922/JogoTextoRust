@@ -1,17 +1,19 @@
+use std::process;
+
 use rand::random_range;
 
 use crate::personagens::Personagem;
 use crate::combate::combate;
 use crate::itens::Item;
 
-pub struct salas
+pub struct Salas
 {
     tem_inimigo: bool,
 }
 
-impl salas
+impl Salas
 {
-    pub fn sala1(&mut self, player: &mut Personagem)
+    pub fn sala1(&mut self, _player: &mut Personagem)
     {
         println!("
             ╔════════════════════════════════════════════════════════════════╗
@@ -67,7 +69,7 @@ impl salas
                 }
                 else
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_vida();
                     player.add_no_inventario(pocao);
                 }
                 
@@ -82,7 +84,7 @@ impl salas
         println!("Você pode ir para o Leste e Oeste: (L) / (O)");
     }   
 
-    pub fn sala3(&mut self, player: &mut Personagem) 
+    pub fn sala3(&mut self, _player: &mut Personagem) 
     {
         println!("
             ╔════════════════════════════════════════════════════╗
@@ -125,12 +127,12 @@ impl salas
                 }
                 else if escolha == 2
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_defesa();
                     player.add_no_inventario(pocao);
                 }
                 else
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_vida();
                     player.add_no_inventario(pocao);
                 }
                 
@@ -172,12 +174,12 @@ impl salas
                 }
                 else if escolha == 2
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_defesa();
                     player.add_no_inventario(pocao);
                 }
                 else
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_vida();
                     player.add_no_inventario(pocao);
                 }
                 
@@ -191,7 +193,7 @@ impl salas
         println!("Você pode ir para o Leste e Oeste: (L) / (O)");
     }
 
-    pub fn sala6(&mut self, player: &mut Personagem) 
+    pub fn sala6(&mut self, _player: &mut Personagem) 
     {
         println!("
             ╔════════════════════════════════════════════════════╗
@@ -234,12 +236,12 @@ impl salas
                 }
                 else if escolha == 2
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_defesa();
                     player.add_no_inventario(pocao);
                 }
                 else
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_vida();
                     player.add_no_inventario(pocao);
                 }
                 
@@ -281,12 +283,12 @@ impl salas
                 }
                 else if escolha == 2
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_defesa();
                     player.add_no_inventario(pocao);
                 }
                 else
                 {
-                    let pocao = Item::gerar_poc_ataque();
+                    let pocao = Item::gerar_poc_vida();
                     player.add_no_inventario(pocao);
                 }
                 
@@ -300,7 +302,7 @@ impl salas
         println!("Você pode ir para o Leste e Oeste: (L) / (O)");
     }
 
-    pub fn sala9(&mut self, player: &mut Personagem) 
+    pub fn sala9(&mut self, _player: &mut Personagem) 
     {
         println!("
             ╔════════════════════════════════════════════════════╗
@@ -348,6 +350,8 @@ impl salas
             A princesa agradece emocionada. Seu nome ecoará pelos séculos.
             Você não é mais apenas um sonhador — agora é um herói de verdade.
             ═════════════════════════════════════════════════════════════════");
+
+        process::exit(0);    
     }
 
     pub fn gerar_sala1() -> Self 

@@ -25,46 +25,66 @@ pub fn combate (player: &mut Personagem, inimigo: &mut Personagem)
 
         let mut escolha = String::new();
 
-        io::stdin().read_line(&mut escolha).unwrap();
+        io::stdin().read_line(&mut escolha).expect("Não foi filhote");
         
-        let escolha: u32 = escolha.trim().parse().unwrap();
+        let escolha = escolha.as_str().trim();
 
         match escolha {
 
-            1 => { player.ataque(inimigo, false);
+            "1" => { player.ataque(inimigo, false);
                     println!("\n========================");
                     println!("Você atacou!");
                     println!("O {} também te atacou!", inimigo.nome);
                     println!("========================\n");
                 },
 
-            2 => { player.ataque(inimigo, true);
+            "2" => { player.ataque(inimigo, true);
                     println!("\n========================");
                     println!("Você usou o golpe especial!");
+                    println!("O {} também te atacou!", inimigo.nome);
                     println!("========================\n");
                  },
 
-            3 => { 
-                    println!("\n========================");
-                    println!("Qual item deseja utilizar?\n");
-                    player.mostrar_inventario();
-                    println!("========================\n");
+            "3" => { 
+                        println!("\n========================");
+                        println!("Qual item deseja utilizar?\n");
+                        let tem = player.mostrar_inventario();
+                        println!("========================\n");
 
-                        let mut item_escolhido = String::new();
+                        if tem
+                        {
+                            let mut item_escolhido = String::new();
 
-                        io::stdin().read_line(&mut item_escolhido).unwrap();
-                        println!("");
-        
-                        let item_escolhido: i32 = item_escolhido.trim().parse().unwrap();
+                            io::stdin().read_line(&mut item_escolhido).unwrap();
+                            println!("");
 
-                    println!("========================");
-                    player.usar_item( item_escolhido-1);
-                    println!("========================\n");
-                    
+                            if item_escolhido.trim().parse::<i32>().is_ok()
+                            {
+                                let item_escolhido: i32 = item_escolhido.trim().parse().unwrap();
+
+                                println!("========================");
+                                player.usar_item( item_escolhido-1);
+                                println!("========================\n");
+                            }
+                            else
+                            {
+                                println!("\n========================");
+                                println!("Errou filho");
+                                println!("========================\n");
+                                
+                            }
+                        }
+                        else
+                        {
+                            println!("\n========================");
+                            println!("Tem nada aqui não, jão!");
+                            println!("========================\n");    
+                        }    
                  
                 },
             
-            _ => {println!("\n========================"); println!("Errou o número, perdeu a vez."); 
+            _ =>    {
+                    println!("\n========================"); println!("Errou o número, perdeu a vez."); 
                     println!("========================\n"); println!("Você foi atacado!"); },
 
         }
@@ -126,7 +146,7 @@ pub fn combate (player: &mut Personagem, inimigo: &mut Personagem)
         println!("Combate encerrado\n");
         println!("Tente novamente!");
         println!("========================\n");
-        process::exit(1);
+        process::exit(0);
     }
     
 }
