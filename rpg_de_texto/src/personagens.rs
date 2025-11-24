@@ -1,5 +1,3 @@
-use std::ops::Index;
-
 use crate::itens::Item;
 
 pub struct Personagem 
@@ -27,16 +25,17 @@ impl Personagem
             "Bárbaro"   => { margem = 26; },
             "Mago"      => { margem = 36; },
             "Dragão"    => { margem = 50; },
-            "Goblin"    => { margem = 10; },
+            "Goblin"    => { margem = 15; },
             "Orc"       => { margem = 20; },
             _           => {println!("aoba");},
         }
 
         if especial == true
         {
-            if let Some(v) = &mut self.ataque_especial {
+            if let Some(v) = &mut self.ataque_especial 
+            {
              *v -= 1; //Gastar ataque especial
-             }
+            }
 
             margem -=15;
         }

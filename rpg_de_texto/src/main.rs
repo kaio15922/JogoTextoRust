@@ -1,70 +1,33 @@
+use std::io::{self};
+
+use crate::{game::game, personagens::Personagem};
+
 mod personagens;
 mod itens;
 mod combate;
-
-use std::ops::Index;
-use crate::{itens::Item, personagens::Personagem, combate::combate};
+mod game;
+mod salas;
 
 fn main() 
 {
-
-    //So testando
-    println!("Hello, world!");
-
     let mut barbaro = Personagem::gerar_barbaro();
     let mut arqueiro = Personagem::gerar_arqueiro();
     let mut mago = Personagem::gerar_mago();
-    let dragao = Personagem::gerar_dragao();
-    let mut goblin = Personagem::gerar_goblin();
-    let orc = Personagem::gerar_orc();
 
-    let vida = Item::gerar_poc_vida();
-    let defesa = Item::gerar_poc_defesa();
-    let ataque = Item::gerar_poc_ataque();
-    let vida2 = Item::gerar_poc_vida();
+    println!("Escolha o seu personagem\n");
+    println!("1 --> Nome: {} == Vida: {} == Ataque: {} == Defesa: {}", barbaro.nome, barbaro.vida, barbaro.ataque, barbaro.defesa);
+    println!("2 --> Nome: {} == Vida: {} == Ataque: {} == Defesa: {}", mago.nome, mago.vida, mago.ataque, mago.defesa);
+    println!("3 --> Nome: {} == Vida: {} == Ataque: {} == Defesa: {}", arqueiro.nome, arqueiro.vida, arqueiro.ataque, arqueiro.defesa);
 
-    println!("o nome do barbaro é {}// sua vida é {}// seu ataque é {}// sua defesa é {}...", barbaro.nome, barbaro.vida, barbaro.ataque, barbaro.defesa);
+    let mut escolha = String::new();
 
-    println!("\n------------------------\n");
-
-    barbaro.add_no_inventario(vida);
-    barbaro.add_no_inventario(ataque);
-    barbaro.add_no_inventario(vida2);
+    io::stdin().read_line(&mut escolha).expect("Deu merda");
     
-
-    println!("\n------------------------\n");
-
-    barbaro.mostrar_inventario();
-
-    println!("\n------------------------\n");
-
-    barbaro.usar_item(2);
-
-    println!("\n------------------------\n");
-
-    println!("vida do arqueiro = {}", barbaro.vida);
-
-    println!("\n------------------------\n");
-
-    barbaro.add_no_inventario(defesa);
-
-    println!("\n------------------------\n");
-    
-    barbaro.mostrar_inventario();
-
-    println!("\n------------------------\n");
-
-    barbaro.usar_item(0);
-    barbaro.usar_item(1);
-    barbaro.usar_item(0);
-
-    println!("\n------------------------\n");
-
-    barbaro.mostrar_inventario();
-
-    //TESTE DE 
-    let vidateste = Item::gerar_poc_vida();
-    mago.add_no_inventario(vidateste);
-
-    combate(&mut mago, &mut goblin);
+    match escolha.as_str()
+    {
+        "1" => {game(&mut barbaro);},
+        "2" => {game(&mut mago);},
+        "3" => {game(&mut arqueiro);},
+        _   => {println!("Some daqui irmão!");},
+    }
 }
