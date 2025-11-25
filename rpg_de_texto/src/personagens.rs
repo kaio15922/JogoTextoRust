@@ -30,20 +30,27 @@ impl Personagem
             _           => {println!("aoba");},
         }
 
-        if especial == true
-        {
+        if self.ataque_especial > Some(0) && especial == true {
+
             if let Some(v) = &mut self.ataque_especial 
-            {
-             *v -= 1; //Gastar ataque especial
-            }
+                {
+                *v -= 1; //Gastar ataque especial
+                };
 
             margem -=15;
+
+        } else {
+
+            if especial == true {
+                println!("O ataque especial falhou, e se tornou um golpe comum!\n");
+            }
         }
 
         let mut dano = rand::random_range(1..=margem);
-        if especial ==true
-        {
-            dano = dano*2 + self.ataque;
+        
+        if self.ataque_especial > Some(0) && especial == true {
+           
+                dano = dano*2 + self.ataque;
         }
 
         if dano > alvo.defesa
